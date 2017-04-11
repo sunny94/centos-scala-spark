@@ -27,7 +27,8 @@ ENV PATH        $JAVA_HOME/bin:$SCALA_HOME/bin:$SBT_HOME/bin:$SPARK_HOME/bin:$SP
 # Download, uncompress and move all the required packages and libraries to their corresponding directories in /usr/local/ folder.
 RUN yum -yq update && \
     yum clean all && \
-    rm -rf /var/lib/apt/lists/* && \
+    yum -y install wget && \
+    yum -y install rsync && \
     rm -rf /tmp/* && \
     wget ${SCALA_BINARY_DOWNLOAD_URL} && tar -zxvf ${SCALA_BINARY_ARCHIVE_NAME}.tgz -C /usr/local/ && \
     wget ${SBT_BINARY_DOWNLOAD_URL} && tar -zxvf ${SBT_BINARY_ARCHIVE_NAME}.tgz -C /usr/local/  && \
@@ -39,8 +40,7 @@ RUN yum -yq update && \
     cp spark/conf/log4j.properties.template spark/conf/log4j.properties && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
-    mkdir /root/.sbt && \
-	yum -y install rsync
+    mkdir /root/.sbt 
 # We will be running our Spark jobs as `root` user.
 USER root
 
