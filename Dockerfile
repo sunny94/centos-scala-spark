@@ -29,6 +29,7 @@ RUN yum -yq update && \
     yum clean all && \
     yum -y install wget && \
     yum -y install rsync && \
+	yum -y install which && \
     rm -rf /tmp/* && \
     wget ${SCALA_BINARY_DOWNLOAD_URL} && tar -zxvf ${SCALA_BINARY_ARCHIVE_NAME}.tgz -C /usr/local/ && \
     wget ${SBT_BINARY_DOWNLOAD_URL} && tar -zxvf ${SBT_BINARY_ARCHIVE_NAME}.tgz -C /usr/local/  && \
