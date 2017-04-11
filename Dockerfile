@@ -1,6 +1,5 @@
 FROM centos:centos7 
-FROM openjdk:8
-
+FROM nimmis/java-centos:openjdk-8-jdk
 MAINTAINER sunny94
 
 # Scala related variables.
