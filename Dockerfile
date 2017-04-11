@@ -1,4 +1,5 @@
 FROM centos:centos7 
+FROM openjdk:8
 
 MAINTAINER sunny94
 
