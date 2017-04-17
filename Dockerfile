@@ -41,7 +41,11 @@ RUN yum -yq update && \
     cp spark/conf/log4j.properties.template spark/conf/log4j.properties && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
-    mkdir /root/.sbt 
+    mkdir /root/.sbt && \
+    wget http://download.redis.io/redis-stable.tar.gz && \
+    tar xvzf redis-stable.tar.gz && \
+    cd redis-stable && \ 
+    make && make install 
 # We will be running our Spark jobs as `root` user.
 USER root
 
