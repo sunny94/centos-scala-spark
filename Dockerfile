@@ -42,10 +42,10 @@ RUN yum -yq update && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
     mkdir /root/.sbt && \
-    wget http://download.redis.io/redis-stable.tar.gz && \
-    tar xvzf redis-stable.tar.gz && \
-    cd redis-stable && \ 
-    make && make install 
+	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && \
+	rpm -ivh epel-release-7-5.noarch.rpm && \
+	yum -y update && \
+	yum install redis -y 
 # We will be running our Spark jobs as `root` user.
 USER root
 
