@@ -1,5 +1,6 @@
 FROM centos:centos7 
 FROM nimmis/java-centos:openjdk-8-jdk
+FROM redis:3.0.7
 MAINTAINER sunny94
 
 # Scala related variables.
@@ -41,11 +42,7 @@ RUN yum -yq update && \
     cp spark/conf/log4j.properties.template spark/conf/log4j.properties && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
-    mkdir /root/.sbt && \
-	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm && \
-	rpm -ivh epel-release-7-9.noarch.rpm && \
-	yum -y update && \
-	yum install redis -y 
+    mkdir /root/.sbt 
 # We will be running our Spark jobs as `root` user.
 USER root
 
