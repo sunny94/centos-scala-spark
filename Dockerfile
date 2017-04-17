@@ -42,7 +42,7 @@ RUN yum -yq update && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
     mkdir /root/.sbt && \
-	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && \
+	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm && \
 	rpm -ivh epel-release-7-5.noarch.rpm && \
 	yum -y update && \
 	yum install redis -y 
