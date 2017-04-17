@@ -47,9 +47,6 @@ RUN yum -yq update && \
 	yum install redis -y && \
 	yum clean all
 
-# Copy config redis
-ADD etc/redis.conf /etc/redis.conf
-
 # We will be running our Spark jobs as `root` user.
 USER root
 
