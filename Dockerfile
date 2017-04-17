@@ -1,6 +1,5 @@
 FROM centos:centos7 
 FROM nimmis/java-centos:openjdk-8-jdk
-FROM redis:3.0.7
 MAINTAINER sunny94
 
 # Scala related variables.
@@ -42,7 +41,15 @@ RUN yum -yq update && \
     cp spark/conf/log4j.properties.template spark/conf/log4j.properties && \
     sed -i -e s/WARN/ERROR/g spark/conf/log4j.properties && \
     sed -i -e s/INFO/ERROR/g spark/conf/log4j.properties && \
-    mkdir /root/.sbt 
+    mkdir /root/.sbt && \
+	yum install epel-release -y && \
+	yum update -y && \
+	yum install redis -y && \
+	yum clean all
+
+# Copy config redis
+ADD etc/redis.conf /etc/redis.conf
+
 # We will be running our Spark jobs as `root` user.
 USER root
 
@@ -53,5 +60,5 @@ WORKDIR /root
 # SparkContext web UI on 4040 -- only available for the duration of the application.
 # Spark master’s web UI on 8080.
 # Spark worker web UI on 8081.
-EXPOSE 4040 8080 8081
+EXPOSE 4040 8080 8081 6379
 CMD ["/bin/bash"]
